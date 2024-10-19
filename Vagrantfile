@@ -6,9 +6,23 @@ numberOfNodes = 3
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/jammy64"
-  config.vm.network "public_network"
   config.vm.synced_folder "data", "/vagrant_data"
-  config.vm.provision "shell", path: "provision.sh"
+  config.vm.network "public_network", bridge: "enp4s0"
+
+  #buildagent vm
+  config.vm.define "buildagent", primary: true do |buildagent|      
+    buildagent.vm.hostname = "buildagent"
+
+    buildagent.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.name = "buildagent"
+      vb.memory = "2048"
+      vb.cpus = 2
+      vb.check_guest_additions = true
+    end
+
+    buildagent.vm.provision "shell", path: "buildagent.sh"
+  end
 
   #master vm
   config.vm.define "k8master", primary: true do |k8master|      
@@ -22,6 +36,7 @@ Vagrant.configure("2") do |config|
       vb.check_guest_additions = true
     end
 
+    k8master.vm.provision "shell", path: "provision.sh"
     k8master.vm.provision "shell", path: "master.sh"
   end
 
@@ -38,6 +53,7 @@ Vagrant.configure("2") do |config|
         vb.check_guest_additions = true
       end
 
+      k8node.vm.provision "shell", path: "provision.sh"
       k8node.vm.provision "shell", path: "node.sh"
     end
   end

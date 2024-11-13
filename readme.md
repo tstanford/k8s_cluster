@@ -27,3 +27,13 @@ Power off the kubernetes control plane and 3 nodes and then delete the VMs from 
 
 ## Change the Number of Nodes in the Cluster
 It is possible to change the number of nodes in the cluster. To do this, change the variable `numberOfNodes` in the VagrantFile.
+
+## TODO:
+
+- setup local container repository
+- build a container image using docker and have it published to the local repository
+- setup a bare metal load balancer and allow it to use DHCP to get an IP address from physical network
+- can master and nodes be moved to a private, host only network?
+- deploy a container image to kubernetes cluster and have it bring up a new service with a new ip addresses
+
+

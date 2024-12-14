@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/jammy64"
   config.vm.synced_folder "data", "/vagrant_data"
-  config.vm.network "public_network", bridge: "enp4s0"
+  config.vm.network "public_network", bridge: "enp7s0"          # <-- set the default bridged network so that it won't prompt everytime
 
   #buildagent vm
   config.vm.define "buildagent", primary: true, autostart: false do |buildagent|      

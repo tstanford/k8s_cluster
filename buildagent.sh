@@ -22,3 +22,11 @@ cd /usr/bin/
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod 755 kubectl
 
+mkdir -p /opt/software
+cd /opt/software
+
+git clone https://github.com/tstanford/sample-service.git
+cd sample-service
+./gradlew build
+docker build -t localhost:5000/sample-service .
+docker push localhost:5000/sample-service

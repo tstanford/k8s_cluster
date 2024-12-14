@@ -30,10 +30,17 @@ It is possible to change the number of nodes in the cluster. To do this, change 
 
 ## TODO:
 
-- setup local container repository
-- build a container image using docker and have it published to the local repository
+x setup local container repository
+x build a container image using docker and have it published to the local repository
 - setup a bare metal load balancer and allow it to use DHCP to get an IP address from physical network
 - can master and nodes be moved to a private, host only network?
 - deploy a container image to kubernetes cluster and have it bring up a new service with a new ip addresses
 
+
+
+# virtual box config
+
+## Disable that annoying notification center
+
+`VBoxManage setextradata global GUI/SuppressMessages confirmGoingFullscreen,remindAboutMouseIntegration,remindAboutAutoCapture`
 
